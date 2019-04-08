@@ -44,7 +44,15 @@ class TestLibrary < Minitest::Test
   def test_adding_book_to_library
     library = Library.new(@books)
     result = library.add_new_book_to_library('Under the Dome')
-    assert_equal(@books[2][:title], result)
+    assert_equal(3, @books.count)
+  end
+
+  def test_change_the_rental_details
+    library = Library.new(@books)
+    result = library.change_rental_details('cat in the hat','Helen','12th March')
+    assert_equal('cat in the hat', find_book('cat in the hat'))
+    assert_equal('Helen', rental_info('cat in the hat')[:student_name])
+    assert_equal('12th March',rental_info('cat in the hat')[:date])
   end
 
 end
